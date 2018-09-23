@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon shortcut" href="./favicon.ico" type="image/x-icon">
+		<link rel="icon" sizes="any" href="./favicon.svg" type="image/svg+xml">
+		<link rel="mask-icon" href="./favicon.svg" color="black">
+		<link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+		<link rel="image_src" href="thumb.jpg" />
+		<title>2001Y Portfolio</title>
+	</head>
+	<body>
+		<header>
+			<h1>2001Y</h1>
+			<img src="logo.svg">
+		</header>
+		<main>
+			<section id="page1">
+				<a href="https://2001y.blogspot.com">YTech</a>
+				<div id="cursor"></div>
+			</section>
+		</main>
+		<footer>
+		    © 2019 2001Y all rights reserved.
+		</footer>
+	</body>
+	<script>
+		let element = document.getElementById("cursor");
+		let wX = element.getBoundingClientRect().width;
+		let wY = element.getBoundingClientRect().height;
+		document.body.addEventListener("mousemove", function(e){
+			let mX = e.clientX;
+			let mY = e.clientY;
+			element.style.top = mY - wY/2 + "px";
+			element.style.left = mX - wX/2 +  "px";
+			element.style.opacity = "1";
+		});
+		document.body.addEventListener("mouseout", function(){
+			element.style.opacity = "0";
+		});
+	</script>
+</html>
