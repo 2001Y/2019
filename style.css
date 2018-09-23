@@ -49,19 +49,48 @@ img {
   background-color: #000;
 }
 
-header,#page1,#page2,footer {
+#page1,#page2,footer {
     height: 100vh;
     scroll-snap-align: start;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
-
+header {
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: 2s;
+  transition: 2s;
+}
+header.delighter.started {
+  opacity: 1;
+}
+header img {
+  width: 60px;
+}
 body {
   cursor: none;
   -webkit-overflow-scrolling: touch;
-  scroll-snap-type: y mandatory;
+  -webkit-scroll-snap-type: y mandatory;
+      -ms-scroll-snap-type: y mandatory;
+          scroll-snap-type: y mandatory;
 }
 a {
   font-size: 3em;
@@ -70,20 +99,39 @@ a {
 #cursor {
   height: .4em;
   width: .4em;
-  transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+          transform:rotate(45deg);
   background: #808080;
   position: fixed;
   opacity: 0;
   pointer-events: none;
-  animation: anim-out .3s forwards;
+  -webkit-animation: anim-out .3s forwards;
+          animation: anim-out .3s forwards;
 }
 a:hover+#cursor {
-  animation: anim .3s forwards;
+  -webkit-animation: anim .3s forwards;
+          animation: anim .3s forwards;
+}
+@-webkit-keyframes anim {
+  100% {
+    background: red;
+    -webkit-transform:rotate(225deg);
+            transform:rotate(225deg);
+  }
 }
 @keyframes anim {
   100% {
     background: red;
-    transform:rotate(225deg);
+    -webkit-transform:rotate(225deg);
+            transform:rotate(225deg);
+  }
+}
+@-webkit-keyframes anim-out {
+  0% {
+    background: red;
+  }
+  100% {
+    background: #808080;
   }
 }
 @keyframes anim-out {
@@ -103,12 +151,14 @@ a:hover+#cursor {
 #cursor:before {
   height: 200vh;
   top: -100vh;
-  transform:rotate(-45deg);
+  -webkit-transform:rotate(-45deg);
+          transform:rotate(-45deg);
 }
 #cursor:after {
   height: 200vw;
   top: calc(-100vw + .4em);
-  transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+          transform:rotate(45deg);
 }
 img {
   width: 70vmin;

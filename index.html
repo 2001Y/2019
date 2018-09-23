@@ -1,45 +1,110 @@
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="stylesheet" href="style.css">
-		<link rel="icon shortcut" href="./favicon.ico" type="image/x-icon">
-		<link rel="icon" sizes="any" href="./favicon.svg" type="image/svg+xml">
-		<link rel="mask-icon" href="./favicon.svg" color="black">
-		<link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
-		<link rel="image_src" href="thumb.jpg" />
-		<title>2001Y Portfolio</title>
-	</head>
-	<body>
-		<header>
-			<h1>2001Y</h1>
-			<img src="logo.svg">
-		</header>
-		<main>
-			<section id="page1">
-				<a href="https://2001y.blogspot.com">YTech</a>
-				<div id="cursor"></div>
-			</section>
-		</main>
-		<footer>
-		    © 2019 2001Y all rights reserved.
-		</footer>
-	</body>
-	<script>
-		let element = document.getElementById("cursor");
-		let wX = element.getBoundingClientRect().width;
-		let wY = element.getBoundingClientRect().height;
-		document.body.addEventListener("mousemove", function(e){
-			let mX = e.clientX;
-			let mY = e.clientY;
-			element.style.top = mY - wY/2 + "px";
-			element.style.left = mX - wX/2 +  "px";
-			element.style.opacity = "1";
-		});
-		document.body.addEventListener("mouseout", function(){
-			element.style.opacity = "0";
-		});
-	</script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon shortcut" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="any" href="./favicon.svg" type="image/svg+xml">
+    <link rel="mask-icon" href="./favicon.svg" color="black">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+    <link rel="image_src" href="thumb.jpg" />
+    <title>2001Y Portfolio</title>
+  </head>
+  <body>
+    <main>
+      <section id="page1">
+        <img src="logo.svg">
+        <a href="https://2001y.blogspot.com">2001Y</a>
+        <div id="cursor"></div>
+      </section>
+      <header data-delighter>
+        <img src="mini-logo.svg">
+        <h1>2001Y</h1>
+      </header>
+      <section id="page1">
+        <p>
+          Last.fmにもMac向けの公式アプリがあります。ただ、何と無く不安定。ログイン起動してなかったり、再生してる曲がうまく反映されなかったり。ただ、Last.fm自体若干マイナーなので、公式アプリが一番いいと思ってました。
+          ただ、それよりもAppStoreからダウンロードできる Muzzy の方が圧倒的にコンパクトで安定しています。
+        </p>
+      </section>
+      <section id="page2">
+        <p>
+          Last.fmにもMac向けの公式アプリがあります。ただ、何と無く不安定。ログイン起動してなかったり、再生してる曲がうまく反映されなかったり。ただ、Last.fm自体若干マイナーなので、公式アプリが一番いいと思ってました。
+          ただ、それよりもAppStoreからダウンロードできる Muzzy の方が圧倒的にコンパクトで安定しています。
+        </p>
+      </section>
+    </main>
+    <footer>
+        © 2019 2001Y all rights reserved.
+    </footer>
+  </body>
+  <script>
+    let element = document.getElementById("cursor");
+    let wX = element.getBoundingClientRect().width;
+    let wY = element.getBoundingClientRect().height;
+    document.body.addEventListener("mousemove", function(e){
+      let oX = e.clientX;
+      let oY = e.clientY;
+      element.style.top = oY - wY/2 + "px";
+      element.style.left = oX - wX/2 +  "px";
+      element.style.opacity = "1";
+    });
+    document.body.addEventListener("touchmove", function(e){
+      let oX = e.clientX;
+      let oY = e.clientY;
+      element.style.top = oY - wY/2 + "px";
+      element.style.left = oX - wX/2 +  "px";
+      element.style.opacity = "1";
+    });
+    document.body.addEventListener("mouseout", function(){
+      element.style.opacity = "0";
+    });
+    document.body.addEventListener("touchmove", function(){
+      element.style.opacity = "0";
+    });
+    var Delighters = new function() {
+        var t = this.dels = [],
+            e = {
+                attribute: "data-delighter",
+                classNames: ["delighter", "started", "ended"],
+                start: .75,
+                end: .75,
+                autoInit: !0
+            };
+        function s() {
+            document.addEventListener("scroll", d);
+            for (var s = document.querySelectorAll("[" + e.attribute + "]"), a = 0; a < s.length; a++) {
+                var n = s[a],
+                    i = n.getAttribute(e.attribute, 2).split(";"),
+                    r = {};
+                r.start = e.start, r.end = e.end;
+                for (var l = 0; l < i.length; l++) {
+                    var o = i[l].split(":"),
+                        c = o[0],
+                        u = isNaN(1 * o[1]) ? o[1] : 1 * o[1];
+                    c && (r[c] = void 0 === u || u)
+                }
+                r.el = n, r.id = t.length, t.push(r), n.classList.add(e.classNames[0]), r.debug && (n.style.outline = "solid red 4px")
+            }
+            d()
+        }
+        function d() {
+            for (var s = window.innerHeight, d = 0; d < t.length; d++) {
+                var a = t[d],
+                    n = a.el.getBoundingClientRect(),
+                    i = n.top / s,
+                    r = n.bottom / s;
+                a.debug && (i >= 0 && i <= 1 && (a.startLine || (a.startLine = document.createElement("div"), document.body.appendChild(a.startLine), a.startLine.style = "position:fixed;height:0;width:100%;border-bottom:dotted red 2px;top:" + 100 * a.start + "vh")), (r < a.end || i > 1) && a.startLine && (a.startLine.parentNode.removeChild(a.startLine), delete a.startLine)), i < a.start && !a.started ? (a.started = !0, a.el.classList.add(e.classNames[1])) : i > a.start && a.started && (a.started = !1, a.el.classList.remove(e.classNames[1])), r < a.end && !a.ended ? (a.ended = !0, a.el.classList.add(e.classNames[2])) : r > a.end && a.ended && (a.ended = !1, a.el.classList.remove(e.classNames[2]))
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            e.autoInit && s()
+        }), this.init = s, this.config = function(t) {
+            for (var s in t)
+                e[s] = t[s]
+        }
+    };
+  </script>
 </html>
